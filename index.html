@@ -3,9 +3,10 @@
   <head>
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <title>hello world</title>
+    <title>passwords</title>
      <link rel="stylesheet" href="photon/dist/css/photon.min.css"> 
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+     <link rel="stylesheet" type="text/css" href="main.css">
     <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -16,6 +17,7 @@
   <h1 class="title">Passwords</h1>
 
   <div class="toolbar-actions">
+    <div class="row">
     <div class="btn-group">
       <button class="btn btn-default" id="mes_pwd">
         <span class="icon icon-user"></span>
@@ -31,11 +33,28 @@
       </button>
      
     </div>
+    <form id="search">
+      <input type="text" >
+      <select>
+        <option>name</option>
+        <option>login</option>
+        <option>password</option>
+        <option>note</option>
+        <option>url</option>
+        <option>categorie</option>
+        <option>owner id</option>
+      </select>
+      <button id="search_btn"> search</button>
+    </form>
+  </div>
   </div>
 </header>
   <div class="window-content">
       <div id="main" class="pane">
-        ...
+       <div id="accordion">
+
+
+        </div>
       </div>
   </div>
    
