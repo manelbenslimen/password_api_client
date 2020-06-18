@@ -7,3 +7,9 @@
 	font-style: italic;
 	font-size: 14px;
 }
+input,label{
+	display: block;
+}
+.btn{
+	display: block;
+}

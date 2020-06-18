@@ -18,55 +18,64 @@ $("#mes_pwd").click(function(){
 		success: function(data){
 		
 			console.log(data);
-		
-			
-        	data.forEach(passwords =>$("#accordion").append(
-        		
-        		'<div class=card>\
-        		<div class=card-header id='+passwords.name_safe+'>\
-			      <h5 class="mb-0">\
-			        <button class="btn btn-link" data-toggle="collapse" data-target=#"'+passwords.login_safe+'" aria-expanded="false" aria-controls="'+passwords.login_safe+'">\
-			          '+passwords.name_safe+'\
-			        </button>\
-			      </h5>\
-        		</div>\
-        		<div id="'+passwords.login_safe+'" class="collapse show" aria-labelledby="'+passwords.name_safe+'" data-parent="#accordion">\
-				      <div class="card-body">\
-				        <table class="table-striped">\
-				        	<tr>\
-				        	<td>login safe</td>\
-				        	<td>'+passwords.login_safe+'</td>\
-				        	</tr>\
-				        	<tr>\
-				        	<td>password safe</td>\
-				        	<td>'+passwords.pwd_safe+'</td>\
-				        	</tr>\
-				        	<tr>\
-				        	<td>url safe</td>\
-				        	<td>'+passwords.url_safe+'</td>\
-				        	</tr>\
-				        	<tr>\
-				        	<td>note</td>\
-				        	<td>'+passwords.note+'</td>\
-				        	</tr>\
-				        	<tr>\
-				        	<td>categorie</td>\
-				        	<td>'+passwords.categorie+'</td>\
-				        	</tr>\
-				        	<tr>\
-				        	<td>owner safe</td>\
-				        	<td>'+passwords.owner_safe+'</td>\
-				        	</tr>\
-				        </table>\
-				      </div>\
-				    </div>\
-        		</div>'
-        		));
-      
-        }
-        	
-	})
+			data.forEach(function(line){
+				$.each(line, function (key, value) {
+					
+					if(key=="categorie"){
+						$("#categorie_list").append(
+							"<a class='btn btn-primary'data-toggle='collapse' data-target='#"+value+"' aria-expanded='false' >"+value+"</a>\
+							<div id="+value+" class='collapse hide'>\
+							</div>\
+							");
 
+					}
+				})
+
+			})
+			var i=1;
+			data.forEach(function(line){
+				
+				$("#"+line.categorie).append("\
+					<div class='card'>\
+						<div class='card-header'>\
+						<a class='btn btn-link' data-toggle='collapse' data-target='#collapse-target"+i+"'>"+line.name_safe+"</a>\
+						</div>\
+						<div id='collapse-target"+i.toString()+"' class= 'collapse hide' '>\
+						 	<div class='card-body' >\
+						 	<label>name safe :</label>\
+						 	<input type='text' value='"+line.name_safe+"' id='name_safe'"+i+">\
+						 	<span class='icon icon-cup' onclick='cpy('name_safe'"+i+");'></span>\
+						 	<label>login safe :</label>\
+						 	<input type='text' value='"+line.login_safe+"' id='login_safe'"+i+">\
+						 	<span class='icon icon-cup' onclick='cpy('login_safe'"+i+");'></span>\
+						 	<label>url safe :</label>\
+						 	<input type='text' value='"+line.url_safe+"' id='url_safe'"+i+">\
+						 	<span class='icon icon-cup' onclick='cpy(url_safe'"+i+");'></span>\
+						 	<label>password safe :</label>\
+						 	<input type='password' value='"+line.pwd_safe+"' id='pwd_safe'"+i+">\
+						 	<span class='icon icon-cup' onclick='cpy('pwd_safe'"+i+");'></span>\
+						 	<span class='icon icon-eye' onclick='hide_pwd('pwd_safe'"+i+");'></span>\
+						 	<label>categorie :</label>\
+						 	<input type='text' value='"+line.categorie+"' id='categorie'"+i+">\
+						 	<span class='icon icon-cup' onclick='cpy('category'"+i+");'></span>\
+						 	<label>note :</label>\
+						 	<input type='text' value='"+line.note+"' id='note'"+i+">\
+						 	<span class='icon icon-cup' onclick='cpy('note'"+i+");'></span>\
+						 	<label>owner safe :</label>\
+						 	<input type='text' value='"+line.owner_safe+"' id='owner_safe'"+i+">\
+						 	<span class='icon icon-cup' onclick='cpy('owner_safe'"+i+");'></span>\
+							</div>\
+						</div>\
+					</div>\
+					")
+				
+				
+				i=i+1;
+			});
+			
+
+        }
+	})
 })
 $("#pwd_partage").click(function(){
 	
@@ -76,24 +85,69 @@ $("#pwd_partage").click(function(){
 		ContentType:"application/json",
 		 headers: {"Authorization": "Token "+token },
 		success: function(data){
-			// ici on ne veux pas que les données s'affiche dans le console mais dans la partie main de l'index
+		
 			console.log(data);
-        data.forEach(passwords =>$("#pwd_table").append(
-        	"<tr width=100%>"+
-        		"<td width=15%>"+passwords.name_safe+"</td>"+
-        		"<td>"+passwords.login_safe+"</td>"+
-        		"<td>"+passwords.pwd_safe+"</td>"+
-        		"<td>"+passwords.url_safe+"</td>"+
-        		"<td>"+passwords.note+"</td>"+
-        		"<td>"+passwords.categorie+"</td>"+
-        		"<td>"+passwords.owner_safe+"</td>"+
-        		"</tr>"
-        		));
-        $("#main").append("</table>");
-}
+			data.forEach(function(line){
+				$.each(line, function (key, value) {
+					
+					if(key=="categorie"){
+						$("#categorie_list").append(
+							"<a class='btn btn-primary'data-toggle='collapse' data-target='#"+value+"' aria-expanded='false' >"+value+"</a>\
+							<div id="+value+" class='collapse hide'>\
+							</div>\
+							");
 
+					}
+				})
+
+			})
+			var i=1;
+			data.forEach(function(line){
+				
+				$("#"+line.categorie).append("\
+					<div class='card'>\
+						<div class='card-header'>\
+						<a class='btn btn-link' data-toggle='collapse' data-target='#collapse-target"+i+"'>"+line.name_safe+"</a>\
+						</div>\
+						<div id='collapse-target"+i.toString()+"' class= 'collapse hide' '>\
+						 	<div class='card-body' >\
+						 	<label>name safe :</label>\
+						 	<input type='text' value='"+line.name_safe+"' id='name_safe'"+i+">\
+						 	<span class='icon icon-cup' onclick='cpy('name_safe'"+i+");'></span>\
+						 	<label>login safe :</label>\
+						 	<input type='text' value='"+line.login_safe+"' id='login_safe'"+i+">\
+						 	<span class='icon icon-cup' onclick='cpy('login_safe'"+i+");'></span>\
+						 	<label>url safe :</label>\
+						 	<input type='text' value='"+line.url_safe+"' id='url_safe'"+i+">\
+						 	<span class='icon icon-cup' onclick='cpy(url_safe'"+i+");'></span>\
+						 	<label>password safe :</label>\
+						 	<input type='password' value='"+line.pwd_safe+"' id='pwd_safe'"+i+">\
+						 	<span class='icon icon-cup' onclick='cpy('pwd_safe'"+i+");'></span>\
+						 	<span class='icon icon-eye' onclick='hide_pwd('pwd_safe'"+i+");'></span>\
+						 	<label>categorie :</label>\
+						 	<input type='text' value='"+line.categorie+"' id='categorie'"+i+">\
+						 	<span class='icon icon-cup' onclick='cpy('category'"+i+");'></span>\
+						 	<label>note :</label>\
+						 	<input type='text' value='"+line.note+"' id='note'"+i+">\
+						 	<span class='icon icon-cup' onclick='cpy('note'"+i+");'></span>\
+						 	<label>owner safe :</label>\
+						 	<input type='text' value='"+line.owner_safe+"' id='owner_safe'"+i+">\
+						 	<span class='icon icon-cup' onclick='cpy('owner_safe'"+i+");'></span>\
+							</div>\
+						</div>\
+					</div>\
+					")
+				
+				
+				i=i+1;
+			});
+			
+
+        }
+	})
 })
-})
+
+
 $("#pwd_equipe").click(function(){
 	
 	$.ajax({
@@ -101,32 +155,92 @@ $("#pwd_equipe").click(function(){
 		url: "https://intranet.proxym-group.net/api/v1/passwords/team",
 		ContentType:"application/json",
 		 headers: {"Authorization": "Token "+token },
-		success: function(data){
-			// ici on ne veux pas que les données s'affiche dans le console mais dans la partie main de l'index
+		 success: function(data){
+		
 			console.log(data);
-        data.forEach(passwords =>$("#pwd_table").append(
-        	"<tr >"+
-        		"<td>"+passwords.name_safe+"</td>"+
-        		"<td>"+passwords.login_safe+"</td>"+
-        		"<td>"+passwords.pwd_safe+"</td>"+
-        		"<td>"+passwords.url_safe+"</td>"+
-        		"<td>"+passwords.note+"</td>"+
-        		"<td>"+passwords.categorie+"</td>"+
-        		"<td>"+passwords.owner_safe+"</td>"+
-        		"</tr>"
-        		));
-        $("#main").append("</table>");
-    }
+			data.forEach(function(line){
+				$.each(line, function (key, value) {
+					
+					if(key=="categorie"){
+						$("#categorie_list").append(
+							"<a class='btn btn-primary'data-toggle='collapse' data-target='#"+value+"' aria-expanded='false' >"+value+"</a>\
+							<div id="+value+" class='collapse hide'>\
+							</div>\
+							");
+
+					}
+				})
+
+			})
+			var i=1;
+			data.forEach(function(line){
+				
+				$("#"+line.categorie).append("\
+					<div class='card'>\
+						<div class='card-header'>\
+						<a class='btn btn-link' data-toggle='collapse' data-target='#collapse-target"+i+"'>"+line.name_safe+"</a>\
+						</div>\
+						<div id='collapse-target"+i.toString()+"' class= 'collapse hide' '>\
+						 	<div class='card-body' >\
+						 	<label>name safe :</label>\
+						 	<input type='text' value='"+line.name_safe+"' id='name_safe'"+i+">\
+						 	<span class='icon icon-cup' onclick='cpy('name_safe'"+i+");'></span>\
+						 	<label>login safe :</label>\
+						 	<input type='text' value='"+line.login_safe+"' id='login_safe'"+i+">\
+						 	<span class='icon icon-cup' onclick='cpy('login_safe'"+i+");'></span>\
+						 	<label>url safe :</label>\
+						 	<input type='text' value='"+line.url_safe+"' id='url_safe'"+i+">\
+						 	<span class='icon icon-cup' onclick='cpy(url_safe'"+i+");'></span>\
+						 	<label>password safe :</label>\
+						 	<input type='password' value='"+line.pwd_safe+"' id='pwd_safe'"+i+">\
+						 	<span class='icon icon-cup' onclick='cpy('pwd_safe'"+i+");'></span>\
+						 	<span class='icon icon-eye' onclick='hide_pwd('pwd_safe'"+i+");'></span>\
+						 	<label>categorie :</label>\
+						 	<input type='text' value='"+line.categorie+"' id='categorie'"+i+">\
+						 	<span class='icon icon-cup' onclick='cpy('category'"+i+");'></span>\
+						 	<label>note :</label>\
+						 	<input type='text' value='"+line.note+"' id='note'"+i+">\
+						 	<span class='icon icon-cup' onclick='cpy('note'"+i+");'></span>\
+						 	<label>owner safe :</label>\
+						 	<input type='text' value='"+line.owner_safe+"' id='owner_safe'"+i+">\
+						 	<span class='icon icon-cup' onclick='cpy('owner_safe'"+i+");'></span>\
+							</div>\
+						</div>\
+					</div>\
+					")
+				
+				
+				i=i+1;
+			});
+			
+
+        }
 	})
-	
 })
 
-function view_list(liste){
-	document.getElementById(liste.name_safe).html=
-	"<ul id="+liste.name_safe+"><li>name safe :"+liste.name_safe+"</li><li>login safe:"+liste.login_safe+"</li><li></li><li></li><li></li><li></li><li></li></ul>";	
-}
+		
+	
+
+
 
 $("#search_btn").click(function(){
 
-	
+
 })
+
+function cpy(champ) {
+	// body...
+	var ct = document.getElementById(champ);
+	ct.select();
+	ct.setSelectionRange(0, 99999);
+
+	document.execCommand("copy");
+}
+function hide_pwd(champ) {
+	// body...
+	var x=document.getElementById(champ)
+	if(x.type=="password")
+		x.type="text"
+	else
+		x.type="password";
+}
