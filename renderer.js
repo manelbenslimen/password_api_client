@@ -5,7 +5,10 @@
 // selectively enable features needed in the rendering
 // process.
 var token="40f8df1703b9d48f669f84da24853fc189112da8";
+var search_data;
 $("#mes_pwd").click(function(){
+
+	$("#categorie_list").html(" ");
 
 
 	$.ajax({
@@ -17,11 +20,14 @@ $("#mes_pwd").click(function(){
         	
 		success: function(data){
 		
-			console.log(data);
+			search_data=data;
+			var valuelist=[]
 			data.forEach(function(line){
 				$.each(line, function (key, value) {
 					
 					if(key=="categorie"){
+						if(valuelist.indexOf(value)==-1){
+							valuelist.push(value);
 						$("#categorie_list").append(
 							"<a class='btn btn-primary'data-toggle='collapse' data-target='#"+value+"' aria-expanded='false' >"+value+"</a>\
 							<div id="+value+" class='collapse hide'>\
@@ -29,8 +35,9 @@ $("#mes_pwd").click(function(){
 							");
 
 					}
-				})
+				}
 
+			})
 			})
 			var i=1;
 			data.forEach(function(line){
@@ -43,27 +50,27 @@ $("#mes_pwd").click(function(){
 						<div id='collapse-target"+i.toString()+"' class= 'collapse hide' '>\
 						 	<div class='card-body' >\
 						 	<label>name safe :</label>\
-						 	<input type='text' value='"+line.name_safe+"' id='name_safe'"+i+">\
-						 	<span class='icon icon-cup' onclick='cpy('name_safe'"+i+");'></span>\
+						 	<input type='text' value='"+line.name_safe+"' id='name_safe"+i+"'>\
+						 	<button  onclick=cpy('name_safe"+i+"'); ><span class='icon icon-cup'></span></button>\
 						 	<label>login safe :</label>\
-						 	<input type='text' value='"+line.login_safe+"' id='login_safe'"+i+">\
-						 	<span class='icon icon-cup' onclick='cpy('login_safe'"+i+");'></span>\
+						 	<input type='text' value='"+line.login_safe+"' id='login_safe"+i+"'>\
+						 	<button  onclick=cpy('login_safe"+i+"'); ><span class='icon icon-cup'></span></button>\
 						 	<label>url safe :</label>\
-						 	<input type='text' value='"+line.url_safe+"' id='url_safe'"+i+">\
-						 	<span class='icon icon-cup' onclick='cpy(url_safe'"+i+");'></span>\
+						 	<input type='text' value='"+line.url_safe+"' id='url_safe"+i+"'>\
+						 	<button  onclick=cpy('url_safe"+i+"'); ><span class='icon icon-cup'></span></button>\
 						 	<label>password safe :</label>\
-						 	<input type='password' value='"+line.pwd_safe+"' id='pwd_safe'"+i+">\
-						 	<span class='icon icon-cup' onclick='cpy('pwd_safe'"+i+");'></span>\
-						 	<span class='icon icon-eye' onclick='hide_pwd('pwd_safe'"+i+");'></span>\
+						 	<input type='password' value='"+line.pwd_safe+"' id='pwd_safe"+i+"'>\
+						 	<button  onclick=cpy('pwd_safe"+i+"'); ><span class='icon icon-cup'></span></button>\
+						 	<button onclick=hide_pwd('pwd_safe"+i+"');><span class='icon icon-eye'></span></button>\
 						 	<label>categorie :</label>\
-						 	<input type='text' value='"+line.categorie+"' id='categorie'"+i+">\
-						 	<span class='icon icon-cup' onclick='cpy('category'"+i+");'></span>\
+						 	<input type='text' value='"+line.categorie+"' id='categorie"+i+"'>\
+						 	<button  onclick=cpy('categorie"+i+"'); ><span class='icon icon-cup'></span></button>\
 						 	<label>note :</label>\
-						 	<input type='text' value='"+line.note+"' id='note'"+i+">\
-						 	<span class='icon icon-cup' onclick='cpy('note'"+i+");'></span>\
+						 	<input type='text' value='"+line.note+"' id='note"+i+"'>\
+						 	<button  onclick=cpy('note"+i+"'); ><span class='icon icon-cup'></span></button>\
 						 	<label>owner safe :</label>\
-						 	<input type='text' value='"+line.owner_safe+"' id='owner_safe'"+i+">\
-						 	<span class='icon icon-cup' onclick='cpy('owner_safe'"+i+");'></span>\
+						 	<input type='text' value='"+line.owner_safe+"' id='owner_safe"+i+"'>\
+						 	<button  onclick=cpy('owner_safe"+i+"'); ><span class='icon icon-cup'></span></button>\
 							</div>\
 						</div>\
 					</div>\
@@ -78,28 +85,36 @@ $("#mes_pwd").click(function(){
 	})
 })
 $("#pwd_partage").click(function(){
-	
-	$.ajax({
+
+
+	$("#categorie_list").html(" ");
+	$.ajax({ 
 
 		url: "https://intranet.proxym-group.net/api/v1/passwords/shared",
 		ContentType:"application/json",
 		 headers: {"Authorization": "Token "+token },
 		success: function(data){
+
 		
-			console.log(data);
+			search_data=data;
+			var valuelist=[];
 			data.forEach(function(line){
+				
 				$.each(line, function (key, value) {
 					
 					if(key=="categorie"){
-						$("#categorie_list").append(
-							"<a class='btn btn-primary'data-toggle='collapse' data-target='#"+value+"' aria-expanded='false' >"+value+"</a>\
-							<div id="+value+" class='collapse hide'>\
-							</div>\
-							");
+						if(valuelist.indexOf(value)==-1){
+							valuelist.push(value);
+							$("#categorie_list").append(
+								"<a class='btn btn-primary'data-toggle='collapse' data-target='#"+value+"' aria-expanded='false' >"+value+"</a>\
+								<div id="+value+" class='collapse hide'>\
+								</div>\
+								");
 
 					}
-				})
+				}
 
+			})
 			})
 			var i=1;
 			data.forEach(function(line){
@@ -112,27 +127,27 @@ $("#pwd_partage").click(function(){
 						<div id='collapse-target"+i.toString()+"' class= 'collapse hide' '>\
 						 	<div class='card-body' >\
 						 	<label>name safe :</label>\
-						 	<input type='text' value='"+line.name_safe+"' id='name_safe'"+i+">\
-						 	<span class='icon icon-cup' onclick='cpy('name_safe'"+i+");'></span>\
+						 	<input type='text' value='"+line.name_safe+"' id='name_safe"+i+"'>\
+						 	<button  onclick=cpy('name_safe"+i+"'); ><span class='icon icon-cup'></span></button>\
 						 	<label>login safe :</label>\
-						 	<input type='text' value='"+line.login_safe+"' id='login_safe'"+i+">\
-						 	<span class='icon icon-cup' onclick='cpy('login_safe'"+i+");'></span>\
+						 	<input type='text' value='"+line.login_safe+"' id='login_safe"+i+"'>\
+						 	<button  onclick=cpy('login_safe"+i+"'); ><span class='icon icon-cup'></span></button>\
 						 	<label>url safe :</label>\
-						 	<input type='text' value='"+line.url_safe+"' id='url_safe'"+i+">\
-						 	<span class='icon icon-cup' onclick='cpy(url_safe'"+i+");'></span>\
+						 	<input type='text' value='"+line.url_safe+"' id='url_safe"+i+"'>\
+						 	<button  onclick=cpy('url_safe"+i+"'); ><span class='icon icon-cup'></span></button>\
 						 	<label>password safe :</label>\
-						 	<input type='password' value='"+line.pwd_safe+"' id='pwd_safe'"+i+">\
-						 	<span class='icon icon-cup' onclick='cpy('pwd_safe'"+i+");'></span>\
-						 	<span class='icon icon-eye' onclick='hide_pwd('pwd_safe'"+i+");'></span>\
+						 	<input type='password' value='"+line.pwd_safe+"' id='pwd_safe"+i+"'>\
+						 	<button  onclick=cpy('pwd_safe"+i+"'); ><span class='icon icon-cup'></span></button>\
+						 	<button onclick=hide_pwd('pwd_safe"+i+"');><span class='icon icon-eye'></span></button>\
 						 	<label>categorie :</label>\
-						 	<input type='text' value='"+line.categorie+"' id='categorie'"+i+">\
-						 	<span class='icon icon-cup' onclick='cpy('category'"+i+");'></span>\
+						 	<input type='text' value='"+line.categorie+"' id='categorie"+i+"'>\
+						 	<button  onclick=cpy('categorie"+i+"'); ><span class='icon icon-cup'></span></button>\
 						 	<label>note :</label>\
-						 	<input type='text' value='"+line.note+"' id='note'"+i+">\
-						 	<span class='icon icon-cup' onclick='cpy('note'"+i+");'></span>\
+						 	<input type='text' value='"+line.note+"' id='note"+i+"'>\
+						 	<button  onclick=cpy('note"+i+"'); ><span class='icon icon-cup'></span></button>\
 						 	<label>owner safe :</label>\
-						 	<input type='text' value='"+line.owner_safe+"' id='owner_safe'"+i+">\
-						 	<span class='icon icon-cup' onclick='cpy('owner_safe'"+i+");'></span>\
+						 	<input type='text' value='"+line.owner_safe+"' id='owner_safe"+i+"'>\
+						 	<button  onclick=cpy('owner_safe"+i+"'); ><span class='icon icon-cup'></span></button>\
 							</div>\
 						</div>\
 					</div>\
@@ -149,6 +164,9 @@ $("#pwd_partage").click(function(){
 
 
 $("#pwd_equipe").click(function(){
+
+	
+	$("#categorie_list").html(" ");
 	
 	$.ajax({
 
@@ -157,11 +175,14 @@ $("#pwd_equipe").click(function(){
 		 headers: {"Authorization": "Token "+token },
 		 success: function(data){
 		
-			console.log(data);
+			search_data=data;
+			var valuelist=[];
 			data.forEach(function(line){
 				$.each(line, function (key, value) {
 					
 					if(key=="categorie"){
+						if(valuelist.indexOf(value)==-1){
+							valuelist.push(value);
 						$("#categorie_list").append(
 							"<a class='btn btn-primary'data-toggle='collapse' data-target='#"+value+"' aria-expanded='false' >"+value+"</a>\
 							<div id="+value+" class='collapse hide'>\
@@ -169,9 +190,11 @@ $("#pwd_equipe").click(function(){
 							");
 
 					}
-				})
+				}
 
 			})
+			})
+
 			var i=1;
 			data.forEach(function(line){
 				
@@ -183,27 +206,27 @@ $("#pwd_equipe").click(function(){
 						<div id='collapse-target"+i.toString()+"' class= 'collapse hide' '>\
 						 	<div class='card-body' >\
 						 	<label>name safe :</label>\
-						 	<input type='text' value='"+line.name_safe+"' id='name_safe'"+i+">\
-						 	<span class='icon icon-cup' onclick='cpy('name_safe'"+i+");'></span>\
+						 	<input type='text' value='"+line.name_safe+"' id='name_safe"+i+"'>\
+						 	<button  onclick=cpy('name_safe"+i+"'); ><span class='icon icon-cup'></span></button>\
 						 	<label>login safe :</label>\
-						 	<input type='text' value='"+line.login_safe+"' id='login_safe'"+i+">\
-						 	<span class='icon icon-cup' onclick='cpy('login_safe'"+i+");'></span>\
+						 	<input type='text' value='"+line.login_safe+"' id='login_safe"+i+"'>\
+						 	<button  onclick=cpy('login_safe"+i+"'); ><span class='icon icon-cup'></span></button>\
 						 	<label>url safe :</label>\
-						 	<input type='text' value='"+line.url_safe+"' id='url_safe'"+i+">\
-						 	<span class='icon icon-cup' onclick='cpy(url_safe'"+i+");'></span>\
+						 	<input type='text' value='"+line.url_safe+"' id='url_safe"+i+"'>\
+						 	<button  onclick=cpy('url_safe"+i+"'); ><span class='icon icon-cup'></span></button>\
 						 	<label>password safe :</label>\
-						 	<input type='password' value='"+line.pwd_safe+"' id='pwd_safe'"+i+">\
-						 	<span class='icon icon-cup' onclick='cpy('pwd_safe'"+i+");'></span>\
-						 	<span class='icon icon-eye' onclick='hide_pwd('pwd_safe'"+i+");'></span>\
+						 	<input type='password' value='"+line.pwd_safe+"' id='pwd_safe"+i+"'>\
+						 	<button  onclick=cpy('pwd_safe"+i+"'); ><span class='icon icon-cup'></span></button>\
+						 	<button onclick=hide_pwd('pwd_safe"+i+"');><span class='icon icon-eye'></span></button>\
 						 	<label>categorie :</label>\
-						 	<input type='text' value='"+line.categorie+"' id='categorie'"+i+">\
-						 	<span class='icon icon-cup' onclick='cpy('category'"+i+");'></span>\
+						 	<input type='text' value='"+line.categorie+"' id='categorie"+i+"'>\
+						 	<button  onclick=cpy('categorie"+i+"'); ><span class='icon icon-cup'></span></button>\
 						 	<label>note :</label>\
-						 	<input type='text' value='"+line.note+"' id='note'"+i+">\
-						 	<span class='icon icon-cup' onclick='cpy('note'"+i+");'></span>\
+						 	<input type='text' value='"+line.note+"' id='note"+i+"'>\
+						 	<button  onclick=cpy('note"+i+"'); ><span class='icon icon-cup'></span></button>\
 						 	<label>owner safe :</label>\
-						 	<input type='text' value='"+line.owner_safe+"' id='owner_safe'"+i+">\
-						 	<span class='icon icon-cup' onclick='cpy('owner_safe'"+i+");'></span>\
+						 	<input type='text' value='"+line.owner_safe+"' id='owner_safe"+i+"'>\
+						 	<button  onclick=cpy('owner_safe"+i+"'); ><span class='icon icon-cup'></span></button>\
 							</div>\
 						</div>\
 					</div>\
@@ -235,6 +258,7 @@ function cpy(champ) {
 	ct.setSelectionRange(0, 99999);
 
 	document.execCommand("copy");
+	alert("text copié");
 }
 function hide_pwd(champ) {
 	// body...
@@ -244,3 +268,82 @@ function hide_pwd(champ) {
 	else
 		x.type="password";
 }
+function search() {
+	// body...
+	var new_data=[];
+	var term= document.getElementById("search-term").value;
+	var e = document.getElementById("filter");
+	var filter = e.options[e.selectedIndex].value;
+	search_data.forEach(function(line){
+		$.each(line, function(key,value){
+			
+			if(key==filter){
+					
+				if(value==term)
+					{
+						new_data.push(line);
+						
+					}}
+
+		})
+	})
+	$("#categorie_list").html(" ");
+		new_data.forEach(function(line){
+				$.each(line, function (key, value) {
+					var valuelist=[];
+					
+					if(key=="categorie"){
+						valuelist.push(value);
+						$("#categorie_list").append(
+							"<a class='btn btn-primary'data-toggle='collapse' data-target='#"+value+"' aria-expanded='false' >"+value+"</a>\
+							<div id="+value+" class='collapse hide'>\
+							</div>\
+							");
+
+					}
+				})
+
+			})
+			var i=1;
+			new_data.forEach(function(line){
+				
+				$("#"+line.categorie).append("\
+					<div class='card'>\
+						<div class='card-header'>\
+						<a class='btn btn-link' data-toggle='collapse' data-target='#collapse-target"+i+"'>"+line.name_safe+"</a>\
+						</div>\
+						<div id='collapse-target"+i.toString()+"' class= 'collapse hide' '>\
+						 	<div class='card-body' >\
+						 	<label>name safe :</label>\
+						 	<input type='text' value='"+line.name_safe+"' id='name_safe"+i+"'>\
+						 	<button  onclick=cpy('name_safe"+i+"'); ><span class='icon icon-cup'></span></button>\
+						 	<label>login safe :</label>\
+						 	<input type='text' value='"+line.login_safe+"' id='login_safe"+i+"'>\
+						 	<button  onclick=cpy('login_safe"+i+"'); ><span class='icon icon-cup'></span></button>\
+						 	<label>url safe :</label>\
+						 	<input type='text' value='"+line.url_safe+"' id='url_safe"+i+"'>\
+						 	<button  onclick=cpy('url_safe"+i+"'); ><span class='icon icon-cup'></span></button>\
+						 	<label>password safe :</label>\
+						 	<input type='password' value='"+line.pwd_safe+"' id='pwd_safe"+i+"'>\
+						 	<button  onclick=cpy('pwd_safe"+i+"'); ><span class='icon icon-cup'></span></button>\
+						 	<button onclick=hide_pwd('pwd_safe"+i+"');><span class='icon icon-eye'></span></button>\
+						 	<label>categorie :</label>\
+						 	<input type='text' value='"+line.categorie+"' id='categorie"+i+"'>\
+						 	<button  onclick=cpy('categorie"+i+"'); ><span class='icon icon-cup'></span></button>\
+						 	<label>note :</label>\
+						 	<input type='text' value='"+line.note+"' id='note"+i+"'>\
+						 	<button  onclick=cpy('note"+i+"'); ><span class='icon icon-cup'></span></button>\
+						 	<label>owner safe :</label>\
+						 	<input type='text' value='"+line.owner_safe+"' id='owner_safe"+i+"'>\
+						 	<button  onclick=cpy('owner_safe"+i+"'); ><span class='icon icon-cup'></span></button>\
+							</div>\
+						</div>\
+					</div>\
+					")
+				
+				
+				i=i+1;
+			});
+			
+
+        }

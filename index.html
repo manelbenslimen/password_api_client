@@ -19,7 +19,7 @@
   <div class="toolbar-actions">
     <div class="row">
     <div class="btn-group">
-      <button class="btn btn-default" id="mes_pwd">
+      <button class="btn btn-default " id="mes_pwd">
         <span class="icon icon-user"></span>
         Mes passwords
       </button>
@@ -27,25 +27,26 @@
         <span class="icon icon-user"></span>
         partagé avec moi
       </button>
-      <button class="btn btn-default active" id="pwd_equipe">
+      <button class="btn btn-default " id="pwd_equipe">
         <span class="icon icon-user"></span>
         passwords d'equipe
       </button>
      
     </div>
     <form id="search">
-      <input type="text" >
-      <select>
-        <option>name</option>
-        <option>login</option>
-        <option>password</option>
-        <option>note</option>
-        <option>url</option>
-        <option>categorie</option>
-        <option>owner id</option>
+      <input type="text" id="search-term">
+      <select id="filter">
+        <option id="name" value="name_safe">name</option>
+        <option id="login" value="login_safe">login</option>
+        <option id="password" value="pwd_safe">password</option>
+        <option id="note" value="note">note</option>
+        <option id="url" value="url_safe">url</option>
+        <option id="categorie" value="categorie">categorie</option>
+        <option id="owner" value="owner_safe">owner id</option>
       </select>
-      <button id="search_btn"> search</button>
+      
     </form>
+    <button id="search_btn"onclick="search();" > search</button>
   </div>
   </div>
 </header>
