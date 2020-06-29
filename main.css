@@ -7,9 +7,13 @@
 	font-style: italic;
 	font-size: 14px;
 }
-input,label{
+
+.btn{
 	display: block;
 }
-.btn{
+#search-term {
+	display: inline;
+}
+input, label{
 	display: block;
 }

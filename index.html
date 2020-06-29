@@ -13,50 +13,47 @@
   crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
- <header class="toolbar toolbar-header">
-  <h1 class="title">Passwords</h1>
+  </head>
+  <body>
+    <div class="window">
+ 
+<div class="window-content"> 
+<div class="pane-group">
+  <div class="pane-sm sidebar">
+<nav class="nav-group ">
+  
+    <input type="text" id="search-term">
+  
+   <a  id="search">
+    <span class="icon icon-search"></span>
+    
+  </a>
+  <h5 class="nav-group-title">Passwords</h5>
+  <a class="nav-group-item active" id="mes_pwd">
+    <span class="icon icon-lock"></span>
+    Mes passwords
+  </a>
+  <a class="nav-group-item active" id="pwd_partage">
+    <span class="icon icon-retweet"></span>
+    Partagés avec moi
+  </a>
+  <a class="nav-group-item active" id="pwd_equipe">
+    <span class="icon icon-users"></span>
+    passwords d'equipes
+  </a></nav>
+  </div>
 
-  <div class="toolbar-actions">
-    <div class="row">
-    <div class="btn-group">
-      <button class="btn btn-default " id="mes_pwd">
-        <span class="icon icon-user"></span>
-        Mes passwords
-      </button>
-      <button class="btn btn-default" id="pwd_partage">
-        <span class="icon icon-user"></span>
-        partagé avec moi
-      </button>
-      <button class="btn btn-default " id="pwd_equipe">
-        <span class="icon icon-user"></span>
-        passwords d'equipe
-      </button>
-     
-    </div>
-    <form id="search">
-      <input type="text" id="search-term">
-      <select id="filter">
-        <option id="name" value="name_safe">name</option>
-        <option id="login" value="login_safe">login</option>
-        <option id="password" value="pwd_safe">password</option>
-        <option id="note" value="note">note</option>
-        <option id="url" value="url_safe">url</option>
-        <option id="categorie" value="categorie">categorie</option>
-        <option id="owner" value="owner_safe">owner id</option>
-      </select>
-      
-    </form>
-    <button id="search_btn"onclick="search();" > search</button>
-  </div>
-  </div>
-</header>
-  <div class="window-content">
+  
+
       <div id="main" class="pane">
        <div id="categorie_list">
          
        </div>
       </div>
   </div>
+ </div>
+ </div> 
+
    
 
 
