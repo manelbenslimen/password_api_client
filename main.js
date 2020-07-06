@@ -1,7 +1,12 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
-const path = require('path')
-const $ = require('jquery')
+
+const path = require('path');
+const $ = require('jquery');
+
+const db = require('electron-db');
+const {app, BrowserWindow}=  require('electron');
+const electron = require('electron');
+//const app = electron.app || electron.remote.app;
 
 function createWindow () {
   // Create the browser window.
@@ -9,7 +14,8 @@ function createWindow () {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, 'preload.js'),
+       nodeIntegration: true
     }
   })
 
@@ -24,6 +30,8 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow)
+
+
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
